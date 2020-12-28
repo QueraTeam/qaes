@@ -1,0 +1,33 @@
+**/env/
+venv/
+.idea/
+.venv/
+
+dist/
+
+# email file backend's default directory
+email-development/
+
+node_modules/
+
+db.sqlite3
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+quera_django.log
+
+static-prod/
+
+.DS_Store/
+.DS_Store
+
+django_telegram/
+
+.envrc
+
+react/npm-debug.log
+
+/geoip2-db/
