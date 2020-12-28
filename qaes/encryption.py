@@ -16,19 +16,19 @@ class AESCipher:
         self.key = hashlib.sha256(key.encode()).digest()
         self.cipher = lambda iv: Cipher(algorithms.AES(self.key), modes.CBC(iv), backend)
 
-    def encrypt(self, raw: str) -> str:
-        raw = raw.encode('utf-8')
-        padded_raw = self._pad(raw)
+    def encrypt(self, plain: str) -> str:
+        plain = plain.encode('utf-8')
+        padded_raw = self._pad(plain)
         iv = self.generate_iv()
         encryptor = self.cipher(iv).encryptor()
         cipher_text = encryptor.update(padded_raw) + encryptor.finalize()
         return base64.b64encode(iv + cipher_text).decode('utf-8')
 
-    def decrypt(self, encrypted: str) -> str:
-        cipher_text = base64.b64decode(encrypted)
-        iv, encrypted = cipher_text[:self.block_size], cipher_text[self.block_size:]
+    def decrypt(self, cipher_text: str) -> str:
+        cipher_text = base64.b64decode(cipher_text)
+        iv, cipher_text = cipher_text[:self.block_size], cipher_text[self.block_size:]
         decryptor = self.cipher(iv).decryptor()
-        decrypted = decryptor.update(encrypted) + decryptor.finalize()
+        decrypted = decryptor.update(cipher_text) + decryptor.finalize()
         return self._unpad(decrypted).decode('utf-8')
 
     def generate_iv(self):
