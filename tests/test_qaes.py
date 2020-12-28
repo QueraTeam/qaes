@@ -26,7 +26,7 @@ class QAESTest(TestCase):
         self.assertEqual(plain, decrypted)
 
     def test_padding(self):
-        text = 'text'
+        text = 'text'.encode('utf-8')
         padded_text = self.cipher._pad(text)
         self.assertTrue(len(padded_text), self.cipher.block_size)
 

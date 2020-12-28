@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "qaes"
-version = "0.1.1"
+version = "1.0.0"
 description = ""
 authors = ["Mohammad Jafari <m.jafari9877@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pycrypto = "^2.6.1"
+cryptography = "^3.3.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
