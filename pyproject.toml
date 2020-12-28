@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "qaes"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Mohammad Jafari <m.jafari9877@gmail.com>"]
 
