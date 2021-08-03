@@ -16,10 +16,10 @@ class AESCipher:
         self.key = hashlib.sha256(key.encode()).digest()
         self.cipher = lambda iv: Cipher(algorithms.AES(self.key), modes.CBC(iv), backend)
 
-    def encrypt(self, plain: str) -> str:
+    def encrypt(self, plain: str, constant_iv=False) -> str:
         plain = plain.encode('utf-8')
         padded_raw = self._pad(plain)
-        iv = self.generate_iv()
+        iv = self.generate_iv(plain, constant_iv)
         encryptor = self.cipher(iv).encryptor()
         cipher_text = encryptor.update(padded_raw) + encryptor.finalize()
         return base64.b64encode(iv + cipher_text).decode('utf-8')
@@ -31,8 +31,19 @@ class AESCipher:
         decrypted = decryptor.update(cipher_text) + decryptor.finalize()
         return self._unpad(decrypted).decode('utf-8')
 
-    def generate_iv(self):
-        return secrets.token_bytes(self.block_size)
+    def generate_iv(self, plain: bytes, constant_iv: bool):
+        if constant_iv:
+            iv = self._constant_iv(plain)
+        else:
+            iv = secrets.token_bytes(self.block_size)
+        return iv
+
+    def _constant_iv(self, plain: bytes):
+        iv = plain
+        while len(iv) < self.block_size:
+            iv += plain
+        iv = iv[:self.block_size]
+        return iv
 
     def _pad(self, data: bytes) -> bytes:
         index = self.block_size - len(data) % self.block_size
@@ -45,3 +56,4 @@ class AESCipher:
 
 
 aes = AESCipher(os.environ.get('AES_KEY', '0' * 32))
+

@@ -15,6 +15,12 @@ class QAESTest(TestCase):
         cipher_text2 = self.cipher.encrypt(plain)
         self.assertNotEqual(cipher_text1, cipher_text2)
 
+    def test_not_equal_encryption_with_short_text(self):
+        plain = "a"
+        cipher_text1 = self.cipher.encrypt(plain)
+        cipher_text2 = self.cipher.encrypt(plain)
+        self.assertNotEqual(cipher_text1, cipher_text2)
+
     def test_decryption(self):
         plain = (
             "this is a very long lorem ipsum raw string text which "
@@ -35,3 +41,16 @@ class QAESTest(TestCase):
         padded_text = 'text' + '\x0c' * (self.cipher.block_size - len(text))
         unpadded_text = self.cipher._unpad(padded_text)
         self.assertEqual(text, unpadded_text)
+
+    def test_equal_encryption_with_constant_iv(self):
+        plain = "some plain text"
+        cipher_text1 = self.cipher.encrypt(plain, constant_iv=True)
+        cipher_text2 = self.cipher.encrypt(plain, constant_iv=True)
+        self.assertEqual(cipher_text1, cipher_text2)
+
+    def test_equal_encryption_with_constant_iv_and_short_text(self):
+        plain = "a"
+        cipher_text1 = self.cipher.encrypt(plain, constant_iv=True)
+        cipher_text2 = self.cipher.encrypt(plain, constant_iv=True)
+        self.assertEqual(cipher_text1, cipher_text2)
+
