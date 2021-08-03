@@ -32,10 +32,10 @@ it's a secret
 ```python
 >>> from qaes import aes
 >>> plain_text = 'some random text to be encrypted'
->>> cipher_text = aes.encrypt(plain_text, randomly=False)
+>>> cipher_text = aes.encrypt(plain_text, constant_iv=True)
 >>> print(cipher_text)
 c29tZSByYW5kb20gdGV4dMGn/mapXT7ToJ3UKvDjKp9bogNKp51OR8LvNQdrzgBy/PS2RPTN3hCihu8lg1Kqog==
->>> cipher_text = aes.encrypt(plain_text, randomly=False)
+>>> cipher_text = aes.encrypt(plain_text, constant_iv=True)
 >>> print(cipher_text)
 c29tZSByYW5kb20gdGV4dMGn/mapXT7ToJ3UKvDjKp9bogNKp51OR8LvNQdrzgBy/PS2RPTN3hCihu8lg1Kqog==
 ```
