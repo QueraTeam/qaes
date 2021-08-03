@@ -33,12 +33,12 @@ class AESCipher:
 
     def generate_iv(self, plain: bytes, constant_iv: bool):
         if constant_iv:
-            iv = self.constant_iv(plain)
+            iv = self._constant_iv(plain)
         else:
             iv = secrets.token_bytes(self.block_size)
         return iv
 
-    def constant_iv(self, plain: bytes):
+    def _constant_iv(self, plain: bytes):
         iv = plain
         while len(iv) < self.block_size:
             iv += plain
