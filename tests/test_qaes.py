@@ -9,7 +9,7 @@ class QAESTest(TestCase):
         self.AES_KEY = '0' * 32
         self.cipher = AESCipher(self.AES_KEY)
 
-    def test_not_equal_encryption(self):
+    def test_not_equal_encryption_on_randomly_mode(self):
         plain = "some plain text"
         cipher_text1 = self.cipher.encrypt(plain)
         cipher_text2 = self.cipher.encrypt(plain)
@@ -35,3 +35,9 @@ class QAESTest(TestCase):
         padded_text = 'text' + '\x0c' * (self.cipher.block_size - len(text))
         unpadded_text = self.cipher._unpad(padded_text)
         self.assertEqual(text, unpadded_text)
+
+    def test_equal_encryption_on_not_randomly_mode(self):
+        plain = "some plain text"
+        cipher_text1 = self.cipher.encrypt(plain, randomly=False)
+        cipher_text2 = self.cipher.encrypt(plain, randomly=False)
+        self.assertEqual(cipher_text1, cipher_text2)

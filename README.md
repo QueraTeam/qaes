@@ -27,3 +27,15 @@ i7atAzh52yonxaVIRrz4C5g6kCQxHTVpeA/VwNHkbtjRWcblseMeCVKBSiAQLTScqO4S29+YUCaRzCbE
 >>> print(decrypted_text)
 it's a secret
 ```
+
+### How to encrypt data non-random
+```python
+>>> from qaes import aes
+>>> plain_text = 'some random text to be encrypted'
+>>> cipher_text = aes.encrypt(plain_text, randomly=False)
+>>> print(cipher_text)
+c29tZSByYW5kb20gdGV4dMGn/mapXT7ToJ3UKvDjKp9bogNKp51OR8LvNQdrzgBy/PS2RPTN3hCihu8lg1Kqog==
+>>> cipher_text = aes.encrypt(plain_text, randomly=False)
+>>> print(cipher_text)
+c29tZSByYW5kb20gdGV4dMGn/mapXT7ToJ3UKvDjKp9bogNKp51OR8LvNQdrzgBy/PS2RPTN3hCihu8lg1Kqog==
+```
