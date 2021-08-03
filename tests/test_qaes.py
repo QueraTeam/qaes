@@ -53,3 +53,4 @@ class QAESTest(TestCase):
         cipher_text1 = self.cipher.encrypt(plain, constant_iv=True)
         cipher_text2 = self.cipher.encrypt(plain, constant_iv=True)
         self.assertEqual(cipher_text1, cipher_text2)
+
