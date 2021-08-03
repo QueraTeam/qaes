@@ -39,7 +39,9 @@ class AESCipher:
         return iv
 
     def constant_iv(self, plain: bytes):
-        iv = plain * (len(plain) // self.block_size + 2)
+        iv = plain
+        while len(iv) < self.block_size:
+            iv += plain
         iv = iv[:self.block_size]
         return iv
 
